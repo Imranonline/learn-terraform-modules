@@ -10,18 +10,34 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Hello 
+    - name: Terraform Format 
       run: |
               terraform fmt -check -recursive -diff
-              tar -zcvf module.tar.gz *
+              
+      env:
+          MODULE_ORG : admin
+          MODULE_NAME : workspace-factory-gcp
+          MODULE_VERSION : 1.0.0
+    # - name: PAcklo 
+    #   run: |
+    #           terraform fmt -check -recursive -diff
+    #           tar --exclude-vcs-ignores --exclude-vcs -zcvf module.tar.gz *
+    #           echo $GIT_COMMIT_SHORT
+    #           ls
+    #   env:
+    #       MODULE_ORG : admin
+    #       MODULE_NAME : workspace-factory-gcp
+    #       MODULE_VERSION : 1.0.0
+  pack:
+    runs-on: ubuntu-18.04
+    steps:
+    - name: PAcklo 
+      run: |
+              terraform fmt -check -recursive -diff
+              tar --exclude-vcs-ignores --exclude-vcs -zcvf module.tar.gz *
               echo $GIT_COMMIT_SHORT
               ls
       env:
           MODULE_ORG : admin
           MODULE_NAME : workspace-factory-gcp
-          MODULE_VERSION : 1.0.0
-    
-            
-      
-
-
+          MODULE_VERSION : 1.0.0          
