@@ -1,0 +1,13 @@
+name: Linux Container Node Workflow
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: hashicorp/terraform:0.12.26
+
+    steps:
+    - uses: actions/checkout@v2
+    - run: terraform fmt -check -recursive
