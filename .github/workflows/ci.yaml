@@ -13,7 +13,7 @@ jobs:
     - name: Hello 
       run: |
               terraform fmt -check -recursive -diff
-              tar --exclude-vcs-ignores --exclude-vcs -zcvf module.tar.gz *
+              tar -zcvf module.tar.gz *
               echo $GIT_COMMIT_SHORT
       env:
           MODULE_ORG : admin
